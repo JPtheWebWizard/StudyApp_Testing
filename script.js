@@ -1,7 +1,8 @@
-
 const textInput = document.getElementById('textInput');
 const canvas = document.getElementById('drawingCanvas');
 const clearButton = document.getElementById('clearButton');
+const runButton = document.getElementById('runButton');
+const consoleOutput = document.getElementById('console');
 const ctx = canvas.getContext('2d');
 
 let isDrawing = false;
@@ -51,6 +52,38 @@ function draw(x, y) {
 
 clearButton.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+});
+
+runButton.addEventListener('click', () => {
+    const code = textInput.value;
+    const language = document.getElementById('languageSelect').value;
+    try {
+        let consoleOutputText = '';
+        const originalConsoleLog = console.log;
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args); // Log to the browser console as well
+            consoleOutputText += args.join(' ') + '\n'; // Concatenate output
+        };
+        
+        switch (language) {
+            case 'javascript':
+                eval(code); // Execute JavaScript code
+                break;
+            case 'python':
+                // Execute Python code using Skulpt
+                Sk.importMainWithBody("<stdin>", false, code);
+                Sk.misceval.run__Promise(Sk.abstr.globals['__main__']);
+                break;
+            default:
+                consoleOutputText = "Unknown language.";
+        }
+
+        console.log = originalConsoleLog; // Restore original console.log
+
+        consoleOutput.innerHTML = `<pre>${consoleOutputText}</pre>`;
+    } catch (error) {
+        consoleOutput.innerHTML = `<p>Error: ${error}</p>`;
+    }
 });
 
 document.getElementById('textInput').addEventListener('keydown', function(e) {

@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question and Answer</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <div class="question-Box">
         <h2>Question:</h2>
         <p>What is the capital of France?</p>
     </div>
     <div class="answer-Box">
+        <div>
+            <label for="languageSelect">Select Language:</label>
+            <select id="languageSelect">
+                <option value="javascript">JavaScript</option>
+                <option value="php">PHP</option>
+                <option value="python">Python</option>
+            </select>
+        </div>
         <div>
             <label>
                 <input type="radio" name="answerFormat" value="text" checked> Text
@@ -22,12 +28,13 @@
                 <input type="radio" name="answerFormat" value="draw"> Draw
             </label>
         </div>
-        <textarea id="textInput" style="display: block;" placeholder="Enter your answer"></textarea>
+        <textarea id="textInput" style="display: block;" placeholder="Enter your code"></textarea>
         <canvas id="drawingCanvas" width="400" height="300"></canvas>
         <button id="clearButton" style="display: none;">Clear</button>
-
+        <button id="runButton">Run</button>
     </div>
+    <div id="console"></div>
     <script src="script.js"></script>
+    
 </body>
-
 </html>
