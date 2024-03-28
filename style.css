@@ -1,0 +1,12 @@
+
+canvas {
+    border: 1px solid black;
+    cursor: crosshair;
+    display: none; /* Initially hide canvas */
+}
+
+.question-Box, .answer-Box {
+    border: 1px solid #000; /* You can adjust the border color and width as needed */
+    padding: 10px; /* Optional: Add some padding inside the boxes */
+    margin-bottom: 20px; /* Optional: Add some space between the boxes */
+}
