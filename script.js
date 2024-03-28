@@ -80,11 +80,16 @@ runButton.addEventListener('click', () => {
 
         console.log = originalConsoleLog; // Restore original console.log
 
-        consoleOutput.innerHTML = `<pre>${consoleOutputText}</pre>`;
+        // Display output in the answer box
+        const answerBoxOutput = document.getElementById('answerBoxOutput');
+        answerBoxOutput.innerHTML = `Output: ${consoleOutputText}`;
     } catch (error) {
-        consoleOutput.innerHTML = `<p>Error: ${error}</p>`;
+        // Display error message in the answer box
+        const answerBoxOutput = document.getElementById('answerBoxOutput');
+        answerBoxOutput.innerHTML = `<p>Error: ${error}</p>`;
     }
 });
+
 
 document.getElementById('textInput').addEventListener('keydown', function(e) {
     if (e.key === 'Tab') {
